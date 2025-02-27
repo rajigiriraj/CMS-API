@@ -29,7 +29,7 @@ export const getChargePointById= async(id)=>{
 };
 export const deletechargePoint= async(id)=>{
     try{
-        const result=await db.query('delete * from charge_point where charge_point_id= $1 returning *', [id])
+        const result=await db.query("update charging_point set isdeleted=TRUE where charge_point_id= $1 returning *", [id])
         return result.rows;
     }
     catch(err){

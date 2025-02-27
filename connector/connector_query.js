@@ -39,7 +39,7 @@ export const updateConnector=async(connector_type,point_id,station_id,isdeleted,
 };
 export const deleteConnectorById= async(id)=>{
     try{
-        const result=await db.query('delete * from connectors where connector_id= $1 returning *', [id])
+        const result=await db.query('UPDATE connectors SET isdeleted=TRUE where connector_id= $1 returning *', [id])
         return result.rows;
     }
     catch(err){

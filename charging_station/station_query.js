@@ -41,7 +41,7 @@ export const updateStation=async(station_name,station_address,station_status,sta
 };
 export const deleteStation=async(station_id)=>{
     try{
-        const result=await db.query("DELETE FROM charging_station WHERE id=$1 RETURNING *",station_id)
+        const result=await db.query("UPDATE charging_station SET isdeleted= TRUE WHERE id=$1 RETURNING *",station_id)
         return result.rows;
     }
     catch(err){

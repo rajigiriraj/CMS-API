@@ -1,4 +1,4 @@
-import {addSession,getSessions,getSessionById,stopSession,deletesessionById} from './session_query.js';
+import {addSession,getSessions,getSessionById,getSessionByuserId,stopSession,deletesessionById} from './session_query.js';
 export const addNewSession = async(req,res)=>{
     try{
         const {start_time,end_time,status,connector_id,charge_point_id,station_id,isdeleted}=req.body;
@@ -18,12 +18,24 @@ export const getallSessions= async(req,res)=>{
         res.status(500).json({Error:err.message})
     }
 }
-export const getSessionById= async(req,res)=>{
+export const getSessionDetailsById= async(req,res)=>{
     try{
         const {transaction_id}=req.params;
         console.log(req);
         
         const session_result= await getSessionById(transaction_id);
+        res.status(200).json({session_result});
+    }
+    catch(err){
+        res.status(500).json({Error:err.message})
+    }
+}
+export const getSessionDetailsBuseryId= async(req,res)=>{
+    try{
+        const {user_id}=req.params;
+        console.log(req);
+        
+        const session_result= await getSessionByuserId(user_id);
         res.status(200).json({session_result});
     }
     catch(err){
